@@ -1,0 +1,15 @@
+* {
+  background-color: lightgray;
+  overflow: hidden;
+}
+
+.chat-button {
+  position: absolute;
+  bottom: 40px;
+  right: 40px;
+  background-color: white;
+}
+
+mat-icon {
+  background-color: white;
+}

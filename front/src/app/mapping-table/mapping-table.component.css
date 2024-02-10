@@ -1,0 +1,21 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  padding: 2%;
+}
+
+.table {
+  max-height: 80vh;
+  overflow-y: scroll;
+  border-radius: 20px;
+  box-shadow: 2px 1px lightslategray;
+}
+
+::-webkit-scrollbar {
+  display: none;
+}
+
+
+.table:hover {
+  overflow-y: scroll;
+}

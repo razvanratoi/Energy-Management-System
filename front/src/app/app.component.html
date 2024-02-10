@@ -1,0 +1,6 @@
+<div>
+  <router-outlet></router-outlet>
+  <button (click)="goToChats()" *ngIf="!onChat" class="chat-button" mat-icon-button matTooltip="Open chat">
+    <mat-icon>chat</mat-icon>
+  </button>
+</div>

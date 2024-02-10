@@ -1,0 +1,34 @@
+<div class="container">
+  <mat-toolbar class="toolbar">
+    <div class="title">{{tableTitle}}</div>
+    <div class="buttons">
+      <button (click)="tableTitle === 'Users' ? addUser() : tableTitle === 'Devices' ? addDevice() : addMapping()"
+              *ngIf="isAdmin"
+              color="accent" mat-raised-button>Add {{tableTitle}}</button>
+      <button (click)="button1 === 'See Users' ? seeUsers() : seeDevices()" *ngIf="isAdmin" color="primary"
+              mat-raised-button>{{button1}}</button>
+      <button (click)="button2 === 'See Devices' ? seeDevices() : seeMappings()" *ngIf="isAdmin"
+              color="primary" mat-raised-button>{{button2}}</button>
+
+      <button (click)="goToChart()" *ngIf="!isAdmin" color="accent" mat-raised-button>See device consumption history
+      </button>
+      <button (click)="logOut()" mat-icon-button matTooltip="Log out">
+        <mat-icon>account_circle</mat-icon>
+      </button>
+    </div>
+  </mat-toolbar>
+
+  <div class="tables">
+    <app-client-table #clientsTable *ngIf="tableTitle === 'Users'"></app-client-table>
+    <app-device-table #devicesTable *ngIf="tableTitle === 'Devices'" [isAdmin]="isAdmin"></app-device-table>
+    <app-mapping-table #mappingsTable *ngIf="tableTitle === 'Users-Device Mappings'"></app-mapping-table>
+  </div>
+</div>
+
+<ng-template #userLogout>
+  <div class="logout-container user-logout">
+    <button (click)="logOut()" class="user-logout" mat-icon-button matTooltip="Log out">
+      <mat-icon>account_circle</mat-icon>
+    </button>
+  </div>
+</ng-template>

@@ -1,0 +1,20 @@
+<h2 mat-dialog-title>Create User-Device Mapping</h2>
+<div class="content" mat-dialog-content>
+  <mat-form-field>
+    <mat-label>Select a User</mat-label>
+    <mat-select [(ngModel)]="mapping.userId">
+      <mat-option *ngFor="let user of users" [value]="user.id">{{ user.name }}</mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-label>Select a Device</mat-label>
+    <mat-select [(ngModel)]="mapping.deviceId">
+      <mat-option *ngFor="let device of devices" [value]="device.id">{{ device.name }}</mat-option>
+    </mat-select>
+  </mat-form-field>
+</div>
+<div class="actions" mat-dialog->
+  <button (click)="onCancel()" color="warn" mat-button>Cancel</button>
+  <button (click)="onCreate()" color="accent" mat-raised-button>Create</button>
+</div>

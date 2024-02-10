@@ -1,0 +1,130 @@
+version: '3.7'
+
+networks:
+  dev:
+    driver: bridge
+    ipam:
+      driver: default
+      config:
+        - subnet: 172.21.0.0/16
+
+services:
+
+  user_db:
+    image: 'postgres:latest'
+    container_name: 'user_db'
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_DB=UsersDB
+    ports:
+      - "5432:5432"
+    restart: always
+    volumes:
+      - user_db_data:/var/lib/postgresql/data 
+    networks:
+      dev:
+        ipv4_address: 172.21.0.2 
+  
+  device_db:
+    image: 'postgres:latest'
+    container_name: 'device_db'
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_DB=devicesdb
+    ports:
+      - "5434:5432"
+    restart: always
+    volumes:
+      - device_db_data:/var/lib/postgresql/data 
+    networks:
+      dev:
+        ipv4_address: 172.21.0.3 
+
+  monitoring_db:
+    image: 'postgres:latest'
+    container_name: 'monitoring_db'
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_DB=monitoring_database
+    ports:
+      - "5439:5432"
+    restart: always
+    volumes:
+      - monitoring_db_data:/var/lib/postgresql/data 
+    networks:
+      dev:
+        ipv4_address: 172.21.0.4   
+
+  web1:
+    container_name: 'usersmicroservice_1'
+    image: 'docker.io/library/usersmicroservice'
+    depends_on:
+      - "user_db"
+    build: ds-back-users\UsersMicroservice
+    ports:
+      - "8088:80"
+    environment:
+      - ConnectionStrings__DefaultConnection=Host=user_db;Port=5432;Database=UsersDB;Username=postgres;Password=postgres;
+      - ASPNETCORE_URL=http://+:80
+    networks:
+      dev:
+        ipv4_address: 172.21.0.5   
+
+  web:
+    container_name: 'devicesmicroservice_1'
+    image: 'docker.io/library/devicesmicroservice'
+    depends_on:
+      - "device_db"
+    build: ds-back-users\DeviceMicroservice
+    ports:
+      - "5555:80"
+    environment:
+      - ConnectionStrings__DefaultConnection=Host=device_db;Port=5434;Database=devicesdb;Username=postgres;Password=postgres;
+      - ASPNETCORE_URL=http://+:80
+    networks:
+      dev:
+        ipv4_address: 172.21.0.6   
+
+  monitoring:
+    container_name: 'monitoring'
+    image: 'docker.io/library/monitoring'
+    depends_on:
+      - "monitoring_db"
+    build: ds-back-users\MonitoringMicroserviceNET
+    ports:
+      - "8089:80"
+    environment:
+      - ConnectionStrings__DefaultConnection=Host=monitoring_db;Port=5432;Database=monitoring_database;Username=postgres;Password=postgres;
+      - ASPNETCORE_URL=http://+:80
+    networks:
+      dev:
+        ipv4_address: 172.21.0.7   
+
+  chat:
+    container_name: 'chat'
+    image: 'docker.io/library/chatmicroservice'
+    build: ds-back-users\ChatMicroservice
+    ports:
+      - "6090:80"
+    environment:
+      - ASPNETCORE_URL=http://+:80
+    networks:
+      dev:
+        ipv4_address: 172.21.0.9
+
+  front:
+    image: 'docker.io/library/front'
+    container_name: 'front'
+    ports:
+      - "3000:80"
+    networks:
+      dev:
+        ipv4_address: 172.21.0.8
+
+volumes:
+  user_db_data:  
+  device_db_data:  
+  monitoring_db_data:

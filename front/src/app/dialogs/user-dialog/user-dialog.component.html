@@ -1,0 +1,44 @@
+<h2 mat-dialog-title>{{!data ? 'Create' : 'Update'}} User</h2>
+<mat-dialog-content class="content">
+  <div class="form-fields">
+    <div class="form-field">
+      <mat-form-field appearance="outline">
+        <mat-label>Name</mat-label>
+        <input [(ngModel)]="user.name" matInput name="name" placeholder="Enter your name" required>
+      </mat-form-field>
+    </div>
+    <div class="form-field">
+      <mat-form-field appearance="outline">
+        <mat-label>Address</mat-label>
+        <input [(ngModel)]="user.address" matInput name="address" placeholder="Enter your address" required>
+      </mat-form-field>
+    </div>
+    <div class="form-field">
+      <mat-form-field appearance="outline">
+        <mat-label>Role</mat-label>
+        <mat-select [(ngModel)]="user.role" [ngModelOptions]="{ standalone: true }">
+          <mat-option *ngFor="let role of roles" [value]="role">{{role}}</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+    <div class="form-field">
+      <mat-form-field appearance="outline">
+        <mat-label>Username</mat-label>
+        <input [(ngModel)]="user.username" matInput name="username" placeholder="Enter your username"
+               required>
+      </mat-form-field>
+    </div>
+    <div class="form-field">
+      <mat-form-field appearance="outline">
+        <mat-label>Password</mat-label>
+        <input [(ngModel)]="user.password" matInput name="password" placeholder="Enter your password"
+               required
+               type="password">
+      </mat-form-field>
+    </div>
+  </div>
+</mat-dialog-content>
+<mat-dialog-actions class="actions">
+  <button (click)="onCancel()" color="warn" mat-button>Cancel</button>
+  <button (click)="onCreate()" color="accent" mat-raised-button>{{!data ? 'Create' : 'Update'}}</button>
+</mat-dialog-actions>

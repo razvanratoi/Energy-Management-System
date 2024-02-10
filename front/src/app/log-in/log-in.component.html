@@ -1,0 +1,20 @@
+<div class="page-container">
+  <mat-card class="login-container">
+    <h1 class="title">Welcome!</h1>
+    <mat-form-field appearance="outline" class="input-container">
+      <mat-label>Username</mat-label>
+      <input [(ngModel)]="credentials.username" matInput>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" class="input-container">
+      <mat-label>Password</mat-label>
+      <input [(ngModel)]="credentials.password" [type]="inputType" matInput>
+      <button (click)="switchInputType()" mat-icon-button>
+        <mat-icon (click)="switchInputType()" *ngIf="inputType === 'text'" matSuffix>visibility</mat-icon>
+        <mat-icon (click)="switchInputType()" *ngIf="inputType === 'password'" matSuffix>visibility_off</mat-icon>
+      </button>
+    </mat-form-field>
+
+    <button (click)="login()" color="accent" mat-raised-button>Log in!</button>
+  </mat-card>
+</div>

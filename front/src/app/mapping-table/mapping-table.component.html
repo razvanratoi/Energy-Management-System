@@ -1,0 +1,26 @@
+<div class="container">
+  <mat-table [dataSource]="dataSource" class="table">
+
+
+    <ng-container matColumnDef="id">
+      <mat-header-cell *matHeaderCellDef>#</mat-header-cell>
+      <mat-cell *matCellDef="let mapping; index as i">{{ i + 1 }}</mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="client">
+      <mat-header-cell *matHeaderCellDef>Client</mat-header-cell>
+      <mat-cell *matCellDef="let mapping">{{ mapping.clientName }}</mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="device">
+      <mat-header-cell *matHeaderCellDef>Device</mat-header-cell>
+      <mat-cell *matCellDef="let mapping">{{ mapping.deviceName }}</mat-cell>
+    </ng-container>
+
+    <mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>
+    <mat-row *matNoDataRow class="mat-row">
+      <td class="mat-cell" colspan="4">No data found...</td>
+    </mat-row>
+  </mat-table>
+</div>

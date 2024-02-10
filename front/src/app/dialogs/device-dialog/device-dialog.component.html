@@ -1,0 +1,38 @@
+<h2 mat-dialog-title>{{!data ? 'Create' : 'Update'}} Device</h2>
+<mat-dialog-content>
+  <div class="form-fields">
+    <div class="form-field">
+      <mat-form-field appearance="outline">
+        <mat-label>Name</mat-label>
+        <input [(ngModel)]="device.name" matInput required>
+      </mat-form-field>
+    </div>
+
+    <div class="form-field">
+      <mat-form-field appearance="outline">
+        <mat-label>Description</mat-label>
+        <input [(ngModel)]="device.description" matInput>
+      </mat-form-field>
+    </div>
+
+    <div class="form-field">
+      <mat-form-field appearance="outline">
+        <mat-label>Address</mat-label>
+        <input [(ngModel)]="device.address" matInput required>
+      </mat-form-field>
+    </div>
+
+    <div class="form-field">
+      <mat-form-field appearance="outline">
+        <mat-label>Max Hourly Consumption</mat-label>
+        <input [(ngModel)]="device.maxHourlyConsumption" matInput
+               required>
+      </mat-form-field>
+    </div>
+
+  </div>
+</mat-dialog-content>
+<mat-dialog-actions class="actions">
+  <button (click)="onCancel()" color="warn" mat-button>Cancel</button>
+  <button (click)="onCreate()" color="accent" mat-raised-button>{{!data ? 'Create' : 'Update'}}</button>
+</mat-dialog-actions>

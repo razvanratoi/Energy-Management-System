@@ -1,0 +1,99 @@
+.container {
+  display: flex;
+}
+
+.list {
+  height: 97vh !important;
+  background-color: white;
+  width: 15vw;
+}
+
+.toolbar {
+  width: 85vw;
+  position: absolute;
+  top: 0;
+}
+
+.messages {
+  margin: 50px -10px;
+  height: 75vh;
+  width: 85vw;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 10px;
+}
+
+.message {
+  padding: 10px;
+  border-radius: 20px;
+  width: 30%;
+  margin: 10px;
+  word-wrap: break-word;
+  background-color: rgba(234, 242, 215, 1);
+}
+
+.received {
+  margin-left: auto;
+  background-color: rgba(228, 241, 254, 1);
+}
+
+.name {
+  font-size: 18px;
+  font-weight: 400;
+}
+
+.details {
+  margin-left: auto;
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+.input {
+  position: absolute;
+  bottom: 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 10px;
+  width: 85vw;
+}
+
+.message-input {
+  display: flex;
+  width: 80%;
+  align-items: center;
+}
+
+.mat-form-field-flex {
+  flex: 1;
+}
+
+::ng-deep .mat-mdc-form-field-subscript-wrapper {
+  display: none;
+}
+
+.send-button {
+  width: 7%;
+  margin-left: 10px;
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background-color: transparent;
+}
+
+/* Scrollbar Thumb */
+::-webkit-scrollbar-thumb {
+  background-color: #808080;
+  border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background-color: #606060;
+}

@@ -1,0 +1,39 @@
+<div class="container">
+  <div>
+
+    <mat-action-list class="list">
+      <mat-list-item (click)="openChat(client)" *ngFor="let client of clients" class="item">
+        <p>{{client.name}}</p>
+      </mat-list-item>
+    </mat-action-list>
+  </div>
+  <div>
+    <mat-toolbar class="toolbar">
+      <button (click)="goToDashboard()" mat-icon-button>
+        <mat-icon>arrow_back</mat-icon>
+      </button>
+      <p class="name">{{currentClient.name}} <span>{{currentClient.status}}</span></p>
+    </mat-toolbar>
+
+    <div #messagesContainer class="messages">
+      <mat-card *ngFor="let message of shownMessages; index as index"
+                [ngClass]="{'received': message.sender === 'Admin'}"
+                class="message">
+        <p>{{message.content}}</p>
+        <div class="details">
+          <p>{{message.timestamp}}</p>
+          <mat-icon>{{messageStatus[index] === 'read' ? 'done_all' : 'done'}}</mat-icon>
+        </div>
+      </mat-card>
+    </div>
+
+    <mat-toolbar class="input">
+      <mat-form-field appearance="outline" class="message-input">
+        <input (input)="setTyping()" (keyup.enter)="sendMessage()" [(ngModel)]="message"
+               [disabled]="currentClient.name === 'Select a client...'" matInput placeholder="Message">
+      </mat-form-field>
+      <button (click)="sendMessage()" class="send-button" color="primary" mat-raised-button>Send</button>
+    </mat-toolbar>
+  </div>
+
+</div>

@@ -1,0 +1,16 @@
+* {
+  overflow: hidden;
+}
+
+.content {
+  display: flex;
+  gap: 30px;
+  margin-bottom: 0;
+}
+
+.actions {
+  display: flex;
+  gap: 30px;
+  padding: 10px;
+  justify-content: flex-end;
+}

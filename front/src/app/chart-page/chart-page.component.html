@@ -1,0 +1,29 @@
+<div class="chart-page-container">
+  <mat-form-field class="example-full-width">
+    <mat-label>Choose a date</mat-label>
+    <input (dateChange)="onDateSelected($event)" [(ngModel)]="selectedDate" [matDatepicker]="picker" matInput>
+    <mat-datepicker-toggle [for]="picker" matIconSuffix>
+      <mat-icon matDatepickerToggleIcon>keyboard_arrow_down</mat-icon>
+    </mat-datepicker-toggle>
+    <mat-datepicker #picker [color]="'accent'" [dateClass]="dateClass"></mat-datepicker>
+  </mat-form-field>
+
+  <mat-card [ngClass]="{'chart-container-message': displayedMonitorings.length === 0}" class="chart-container">
+    <ng-container *ngIf="displayedMonitorings.length === 0; else chartContent">
+      <p class="no-data-message">No data for this day...</p>
+    </ng-container>
+
+    <ng-template #chartContent>
+      <div class="chart-wrapper">
+        <app-chart [deviceIds]="deviceIds" [devices]="devices" [monitorings]="displayedMonitorings"></app-chart>
+      </div>
+    </ng-template>
+  </mat-card>
+
+
+  <button (click)="goBack()" class="back-button" mat-icon-button>
+    <mat-icon>chevron_left</mat-icon>
+  </button>
+
+  <p class="title">See your devices' consumption!</p>
+</div>

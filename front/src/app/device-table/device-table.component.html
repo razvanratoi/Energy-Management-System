@@ -1,0 +1,48 @@
+<div [ngClass]="{'margin-top': !isAdmin}" class="container">
+  <mat-table [dataSource]="dataSource" class="table">
+
+    <ng-container matColumnDef="id">
+      <mat-header-cell *matHeaderCellDef>#</mat-header-cell>
+      <mat-cell *matCellDef="let device; index as i">{{ i + 1 }}</mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="name">
+      <mat-header-cell *matHeaderCellDef>Name</mat-header-cell>
+      <mat-cell *matCellDef="let device">{{ device.name }}</mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="address">
+      <mat-header-cell *matHeaderCellDef>Address</mat-header-cell>
+      <mat-cell *matCellDef="let device">{{ device.address }}</mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="description">
+      <mat-header-cell *matHeaderCellDef>Description</mat-header-cell>
+      <mat-cell *matCellDef="let device" [matTooltip]="device.description" class="single-line-text"
+                matTooltipPosition="after">{{ device.description }}</mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="maxHourlyConsumption">
+      <mat-header-cell *matHeaderCellDef>Max Hourly Consumption</mat-header-cell>
+      <mat-cell *matCellDef="let device">{{ device.maxHourlyConsumption }}</mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="actions">
+      <mat-header-cell *matHeaderCellDef></mat-header-cell>
+      <mat-cell *matCellDef="let device">
+        <button (click)="editDevice(device)" *ngIf="isAdmin" class="edit-icon" mat-icon-button matTooltip="Edit">
+          <mat-icon>edit</mat-icon>
+        </button>
+        <button (click)="deleteDevice(device)" *ngIf="isAdmin" class="delete-icon" mat-icon-button matTooltip="Delete">
+          <mat-icon>delete</mat-icon>
+        </button>
+      </mat-cell>
+
+    </ng-container>
+    <mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>
+    <mat-row *matNoDataRow class="mat-row">
+      <td class="mat-cell" colspan="4">No data found...</td>
+    </mat-row>
+  </mat-table>
+</div>

@@ -1,0 +1,59 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  padding: 2%;
+}
+
+.table {
+  max-height: 80vh;
+  overflow-y: scroll;
+  border-radius: 20px;
+  box-shadow: 2px 1px lightslategray;
+}
+
+::-webkit-scrollbar {
+  display: none;
+}
+
+.table:hover {
+  overflow-y: scroll;
+}
+
+.delete-icon {
+  color: red
+}
+
+.edit-icon {
+  color: darkorange;
+}
+
+.margin-top {
+  margin-top: 50px;
+}
+
+.single-line-text {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  width: 20vh;
+  flex: 1.1;
+}
+
+*::-webkit-scrollbar {
+  width: 10px; /* Adjust the scrollbar width as needed */
+  background-color: transparent;
+}
+
+*::-webkit-scrollbar-track {
+  background: transparent; /* Track color */
+}
+
+*::-webkit-scrollbar-thumb {
+  background: #888; /* Thumb color */
+  border-radius: 5px; /* Rounded thumb */
+}
+
+*::-webkit-scrollbar-thumb:hover {
+  background: #555; /* Hovered thumb color */
+}
+
